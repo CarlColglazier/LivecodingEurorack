@@ -1,0 +1,18 @@
+let volts = pF "volts"
+
+d1 $ fast "1" $ stack [
+  -- every 2 (0.25 <~) $ s "<[bd*4 [sd sd] bd*2 [sd*4]], [hh hh . hh:4 ~ ~ hh]*2>" # n (irand 4) # speed rand # pan rand
+  s "<[bd . sd . bd . sd]>" # n (irand 3) # pan sine
+  , s "[hh hh . hh ~ ~ hh]*2"
+  , n (-12 + "0 -12 . <-7, 0> 12 . <0, 12> . -10 0") # s "supergong" # legato "1" # gain "0.9"
+]
+
+
+
+d3 $ fast "1" $ s "dc_out" |*| volts sine --(choose [0, -5, 5])
+
+d5 $ fast "1" $ s "dc_out" |*| volts "[-1 1 -2 5]"
+
+d1 $ silence
+
+hush
